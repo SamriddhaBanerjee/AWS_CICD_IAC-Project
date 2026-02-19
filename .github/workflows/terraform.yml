@@ -2,7 +2,12 @@ name: Terraform CI/CD
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - dev
+      - main
+
+env:
+  TF_STATE_KEY: ${{ github.ref == 'refs/heads/dev' && 'sam_dev/terraform.tfstate' || 'sam_acc/terraform.tfstate' }}
 
 jobs:
   terraform:
@@ -21,18 +26,13 @@ jobs:
           aws-region: ap-south-1
 
       - name: Terraform Init
-        run: terraform init
+        run: terraform init -backend-config="key=${TF_STATE_KEY}"
 
       - name: Terraform Validate
         run: terraform validate
 
       - name: Terraform Plan
-        run: terraform plan
-
-      - name: Terraform Plan
         run: terraform plan -out=tfplan
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve out=tfplan
-      
-      
+        run: terraform apply -auto-approve tfplan
