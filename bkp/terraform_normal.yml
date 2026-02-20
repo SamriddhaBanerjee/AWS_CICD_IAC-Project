@@ -1,0 +1,46 @@
+name: Terraform CI/CD
+
+on:
+  push:
+    branches:
+      - dev
+  
+  pull_request:
+    branches:
+      - main
+
+env:
+  TF_STATE_KEY: ${{ 
+    github.ref == 'refs/heads/dev' && 'sam_dev/terraform.tfstate' || 
+    github.ref == 'refs/heads/acc' && 'sam_acc/terraform.tfstate' || 
+    github.ref == 'refs/heads/main' && 'sam_prod/terraform.tfstate' }}
+
+
+jobs:
+
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-south-1
+
+      - name: Terraform Init
+        run: terraform init -backend-config="key=${TF_STATE_KEY}"
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan -out=tfplan
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve tfplan
