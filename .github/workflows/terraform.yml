@@ -7,7 +7,7 @@ on:
       - main
 
 env:
-  TF_STATE_KEY: ${{ github.ref == 'refs/heads/dev' && 'sam_dev/terraform.tfstate' || 'sam_acc/terraform.tfstate' }}
+  TF_STATE_KEY: ${{ github.ref == 'refs/heads/dev' && 'sam_dev/terraform.tfstate' || 'sam_acc/terraform.tfstate'  || 'sam_prod/terraform.tfstate'}}
 
 jobs:
   terraform:
