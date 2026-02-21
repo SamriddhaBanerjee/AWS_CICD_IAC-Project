@@ -17,9 +17,6 @@ jobs:
     if: github.ref == 'refs/heads/dev'
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: environments/dev
     env:
       TF_STATE_KEY: sam_dev/terraform.tfstate
 
@@ -54,10 +51,6 @@ jobs:
   terraform-acc:
     if: github.ref == 'refs/heads/acc'
     runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: environments/acc
 
     env:
       TF_STATE_KEY: sam_acc/terraform.tfstate
@@ -94,10 +87,6 @@ jobs:
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: environments/prod
-
     env:
       TF_STATE_KEY: sam_prod/terraform.tfstate
 
@@ -130,10 +119,6 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment: production   # Enables manual approval in GitHub
-
-    defaults:
-      run:
-        working-directory: environments/prod
 
     env:
       TF_STATE_KEY: sam_prod/terraform.tfstate
