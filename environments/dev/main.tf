@@ -20,6 +20,6 @@ module "ec2" {
   name              = "dev-instance"
   ami_id            = "ami-0bca660a856fc8c72"
   instance_type     = "t3.micro"
-  subnet_id         = module.vpc.public_sub_1_id
+  subnet_id         = module.vpc.public_subnet1_id
   security_group_id = [module.security_group.security_group_id]
 }
