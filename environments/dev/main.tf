@@ -10,8 +10,10 @@ module "vpc" {
 }
 
 module "security_group" {
-  source = "../../modules/security-groups"
-  vpc_id = module.vpc.vpc_id
+  source      = "../../modules/security-groups"
+  name        = "dev-app-sg"
+  description = "development security groups"
+  vpc_id      = module.vpc.vpc_id
 
 }
 
