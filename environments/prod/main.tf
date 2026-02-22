@@ -20,12 +20,14 @@ module "security_group" {
       from_port   = 80
       to_port     = 80
       protocol    = "TCP"
+      cidr_block  = "0.0.0.0/0"
     },
     {
       description = "HTTPS"
       from_port   = 443
       to_port     = 443
       protocol    = "TCP"
+      cidr_block  = "0.0.0.0/0"
     }
   ]
   egress_rules = [
@@ -34,12 +36,14 @@ module "security_group" {
       from_port   = 80
       to_port     = 80
       protocol    = "TCP"
+      cidr_block  = "0.0.0.0/0"
     },
     {
       description = "HTTPS"
       from_port   = 443
       to_port     = 443
       protocol    = "TCP"
+      cidr_block  = "0.0.0.0/0"
     }
   ]
 }
