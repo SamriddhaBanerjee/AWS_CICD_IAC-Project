@@ -30,8 +30,8 @@ variable "egress_rules" {
   description = "list of Egress Values"
   type = list(object({
     description = string #rules for egress port
-    from_port   = number
-    to_port     = number
+    from_port   = list(number)
+    to_port     = list(number)
     protocol    = string
     cidr_block  = list(string)
   }))

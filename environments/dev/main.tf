@@ -14,6 +14,22 @@ module "security_group" {
   name        = "dev-app-sg"
   description = "development security groups"
   vpc_id      = module.vpc.vpc_id
+  ingress_rules = [ 
+    {
+      description = "HTTPS"
+      from_port=[80,443]
+      to_port = [80,443]
+      protocol = "TCP"
+    }
+   ]
+  egress_rules = [ 
+    {
+      description = "HTTPS"
+      from_port=[80,443]
+      to_port = [80,443]
+      protocol = "TCP"
+    }
+   ]
 
 }
 

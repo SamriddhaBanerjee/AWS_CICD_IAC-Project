@@ -14,7 +14,22 @@ module "security_group" {
   name        = "prod-app-sg"
   description = "production security groups"
   vpc_id      = module.vpc.vpc_id
-
+  ingress_rules = [
+    {
+      description = "HTTPS"
+      from_port   = [80, 443]
+      to_port     = [80, 443]
+      protocol    = "TCP"
+    }
+  ]
+  egress_rules = [
+    {
+      description = "HTTPS"
+      from_port   = [80, 443]
+      to_port     = [80, 443]
+      protocol    = "TCP"
+    }
+  ]
 }
 
 module "ec2" {
@@ -24,5 +39,5 @@ module "ec2" {
   instance_type     = "t3.micro"
   subnet_id         = module.vpc.public_sub_1
   security_group_id = [module.security_group.security_group_id]
-  root_volume_size = 50
+  root_volume_size  = 50
 }
