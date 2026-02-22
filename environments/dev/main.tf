@@ -24,4 +24,5 @@ module "ec2" {
   instance_type     = "t3.micro"
   subnet_id         = module.vpc.public_sub_1
   security_group_id = [module.security_group.security_group_id]
+  root_volume_size = 50
 }
