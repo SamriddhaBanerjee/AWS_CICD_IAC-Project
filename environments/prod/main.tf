@@ -17,16 +17,28 @@ module "security_group" {
   ingress_rules = [
     {
       description = "HTTPS"
-      from_port   = [80, 443]
-      to_port     = [80, 443]
+      from_port   = 80
+      to_port     = 80
+      protocol    = "TCP"
+    },
+    {
+      description = "HTTPS"
+      from_port   = 443
+      to_port     = 443
       protocol    = "TCP"
     }
   ]
   egress_rules = [
     {
       description = "HTTPS"
-      from_port   = [80, 443]
-      to_port     = [80, 443]
+      from_port   = 80
+      to_port     = 80
+      protocol    = "TCP"
+    },
+    {
+      description = "HTTPS"
+      from_port   = 443
+      to_port     = 443
       protocol    = "TCP"
     }
   ]
