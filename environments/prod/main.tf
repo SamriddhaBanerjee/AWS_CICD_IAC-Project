@@ -3,8 +3,8 @@ module "vpc" {
 
   environment          = "prod"
   vpc_cidr             = "10.1.0.0/20"
-  public_subnet_cidr_1 = "10.1.0.0/24"
-  public_subnet_cidr_2 = "10.2.0.0/24"
+  public_subnet_cidr_1 = "10.1.1.0/24"
+  public_subnet_cidr_2 = "10.1.2.0/24"
   availability_zone_1  = "ap-south-1a"
   availability_zone_2  = "ap-south-1b"
 }
